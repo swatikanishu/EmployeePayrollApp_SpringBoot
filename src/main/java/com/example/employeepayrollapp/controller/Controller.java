@@ -34,27 +34,4 @@ public class Controller {
         return empData;
     }
 
-    @GetMapping("/get/{id}")
-    public Optional<Model> sayHelloById(@PathVariable Long id) {
-        Optional<Model> response = service.sayHelloById(id);
-        return response;
-    }
-
-
-    @GetMapping("/allPayroll")
-    public List<Model> findAllPayroll() {
-        return service.findByAllGreet();
-    }
-
-    @PutMapping("/edit/{id}")
-    public Model editPayroll(@RequestBody Model greeting, @PathVariable Long id) {
-        return service.editGreeting(greeting, id);
-
-    }
-    @DeleteMapping("/delete/{id}")
-    public String deletePayroll(@PathVariable Long id) {
-        service.deletePayroll(id);
-        return "Message Deleted";
-    }
-
 }
