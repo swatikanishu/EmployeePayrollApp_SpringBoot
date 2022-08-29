@@ -10,6 +10,12 @@ public class Model {
     Long employeeId;
     String employeeName;
     String profilePic;
+    String department;
+    Date startDate;
+    String notes;
+    String gender;
+    Long salary;
+
 
     public Model(Long employeeId, String employeeName, String profilePic, String gender, Long salary, String department, Date startDate, String notes) {
         this.employeeId = employeeId;
@@ -22,8 +28,6 @@ public class Model {
         this.notes = notes;
     }
 
-    String gender;
-    Long salary;
 
     public Model() {
 
@@ -93,9 +97,6 @@ public class Model {
         this.notes = notes;
     }
 
-    String department;
-    Date startDate;
-    String notes;
 
 
 }

@@ -3,8 +3,12 @@ package com.example.employeepayrollapp.controller;
 import com.example.employeepayrollapp.model.Model;
 import com.example.employeepayrollapp.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
@@ -23,12 +27,34 @@ public class Controller {
     public String serviceCall() {
         return service.helloMessage();
     }
+
     @PostMapping("/post")
     public Model addEmpData(@RequestBody Model empData) {
         service.saveData(empData);
         return empData;
     }
 
+    @GetMapping("/get/{id}")
+    public Optional<Model> sayHelloById(@PathVariable Long id) {
+        Optional<Model> response = service.sayHelloById(id);
+        return response;
+    }
+
+
+    @GetMapping("/allPayroll")
+    public List<Model> findAllPayroll() {
+        return service.findByAllGreet();
+    }
+
+    @PutMapping("/edit/{id}")
+    public Model editPayroll(@RequestBody Model greeting, @PathVariable Long id) {
+        return service.editGreeting(greeting, id);
+
+    }
+    @DeleteMapping("/delete/{id}")
+    public String deletePayroll(@PathVariable Long id) {
+        service.deletePayroll(id);
+        return "Message Deleted";
+    }
 
 }
-
