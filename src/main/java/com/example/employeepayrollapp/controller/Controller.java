@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
 
     @Autowired
+
     HelloService service;
 
     @GetMapping(value = {"", "/", "/home"})
