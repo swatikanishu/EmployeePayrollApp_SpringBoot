@@ -1,5 +1,6 @@
 package com.example.employeepayrollapp.services;
 
+import com.example.employeepayrollapp.dto.EmployeeDto;
 import com.example.employeepayrollapp.model.Model;
 import com.example.employeepayrollapp.repo.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,20 @@ public class HelloService {
         return "Welcome To employeepayroll";
     }
 
-    public Model saveData(Model payroll) {
-        repository.save(payroll);
-        return payroll;
+    public Model saveData(EmployeeDto payroll) {
+        Model newuser =new Model (payroll);
+        repository.save(newuser);
+
+        return newuser;
     }
-    public Optional<Model> sayHelloById(long id) {
+    public Optional<Model> sayHelloById(Long id) {
         return repository.findById(id);
 
     }
     public List<Model> findByAllGreet(){
         return repository.findAll();
     }
-    public Model editGreeting(Model greeting, long id) {
+    public Model editGreeting(Model greeting, Long id) {
         Model existingGreet = repository.findById(id).orElse(null);
         if (existingGreet != null) {
             existingGreet.setDepartment(greeting.getDepartment());
@@ -45,7 +48,7 @@ public class HelloService {
         } else
             return null;
     }
-    public void deletePayroll(long id) {
+    public void deletePayroll(Long id) {
         repository.deleteById(id);
     }
 }
