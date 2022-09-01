@@ -14,4 +14,8 @@ public class ResponseDto {
         this.message = string;
         this.object = response;
     }
+    public ResponseDto(String string, String response) {
+        this.message = string;
+        this.object = response;
+    }
 }

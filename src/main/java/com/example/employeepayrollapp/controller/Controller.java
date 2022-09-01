@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class Controller {
     }
 
     @PostMapping("/post")
-    public ResponseEntity <ResponseDto> addEmpData(@RequestBody EmployeeDto empData) {
+    public ResponseEntity <ResponseDto> addEmpData(@Valid @RequestBody EmployeeDto empData) {
         Model response=service.saveData(empData);
         ResponseDto responseDto =new ResponseDto("Data is addded",response);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
@@ -44,13 +45,14 @@ public class Controller {
     }
 
 
+
     @GetMapping("/allPayroll")
     public List<Model> findAllPayroll() {
         return service.findByAllGreet();
     }
 
     @PutMapping("/edit/{id}")
-    public Model editPayroll(@RequestBody Model greeting, @PathVariable Long id) {
+    public Model editPayroll(@Valid @RequestBody Model greeting, @PathVariable Long id) {
         return service.editGreeting(greeting, id);
 
     }
