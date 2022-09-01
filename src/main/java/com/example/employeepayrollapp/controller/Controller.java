@@ -48,12 +48,16 @@ public class Controller {
 
     @GetMapping("/allPayroll")
     public List<Model> findAllPayroll() {
-        return service.findByAllGreet();
+        return service.findByAllPayroll();
     }
 
     @PutMapping("/edit/{id}")
-    public Model editPayroll(@Valid @RequestBody Model greeting, @PathVariable Long id) {
-        return service.editGreeting(greeting, id);
+    public ResponseEntity<ResponseDto> editId(@PathVariable Long id,@Valid @RequestBody EmployeeDto  empDto) {
+        Optional<Model>emp=null;
+         emp = Optional.ofNullable(service.editPayroll(empDto, id));
+        ResponseDto responseDto = new ResponseDto("  Data edited successfully  ", emp);
+        return new ResponseEntity<>(responseDto, HttpStatus.ACCEPTED);
+
 
     }
     @DeleteMapping("/delete/{id}")

@@ -29,26 +29,26 @@ public class HelloService {
         return repository.findById(id);
 
     }
-    public List<Model> findByAllGreet(){
+    public List<Model> findByAllPayroll(){
         return repository.findAll();
     }
-    public Model editGreeting(Model greeting, Long id) {
-        Model existingGreet = repository.findById(id).orElse(null);
-        if (existingGreet != null) {
-            existingGreet.setDepartment(greeting.getDepartment());
-            existingGreet.setSalary(greeting.getSalary());
-            existingGreet.setEmployeeId(greeting.getEmployeeId());
-            existingGreet.setEmployeeName(greeting.getEmployeeName());
-            existingGreet.setProfilePic(greeting.getProfilePic());
-            existingGreet.setGender(greeting.getGender());
-            existingGreet.setNotes(greeting.getNotes());
-            existingGreet.setDepartment(greeting.getDepartment());
-            existingGreet.setStartDate(greeting.getStartDate());
-            return repository.save(existingGreet);
+    public Model editPayroll(EmployeeDto employeeData, Long id) {
+        Model existingData = repository.findById(id).orElse(null);
+        if (existingData != null) {
+            existingData.setSalary(employeeData.getSalary());
+            existingData.setEmployeeName(employeeData.getEmployeeName());
+            existingData.setProfilePic(employeeData.getProfilePic());
+            existingData.setGender(employeeData.getGender());
+            existingData.setNotes(employeeData.getNotes());
+            existingData.setDepartment(employeeData.getDepartment());
+            existingData.setStartDate(employeeData.getStartDate());
+            return repository.save(existingData);
         } else
             return null;
     }
     public void deletePayroll(Long id) {
         repository.deleteById(id);
     }
+
+
 }

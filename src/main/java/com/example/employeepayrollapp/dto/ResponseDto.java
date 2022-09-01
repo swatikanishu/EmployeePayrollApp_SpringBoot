@@ -4,6 +4,8 @@ import com.example.employeepayrollapp.model.Model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @NoArgsConstructor
 public class ResponseDto {
@@ -15,6 +17,10 @@ public class ResponseDto {
         this.object = response;
     }
     public ResponseDto(String string, String response) {
+        this.message = string;
+        this.object = response;
+    }
+    public ResponseDto(String string, Optional<Model> response) {
         this.message = string;
         this.object = response;
     }
