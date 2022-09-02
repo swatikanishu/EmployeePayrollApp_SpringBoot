@@ -3,7 +3,7 @@ package com.example.employeepayrollapp.controller;
 import com.example.employeepayrollapp.dto.EmployeeDto;
 import com.example.employeepayrollapp.dto.ResponseDto;
 import com.example.employeepayrollapp.model.Model;
-import com.example.employeepayrollapp.services.HelloService;
+import com.example.employeepayrollapp.services.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class Controller {
 
     @Autowired
 
-    HelloService service;
+    IService service;
 
     @GetMapping(value = {"", "/", "/home"})
     public String emp(@RequestParam(value = "name", defaultValue = "Swatika") String name) {
@@ -52,9 +52,8 @@ public class Controller {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<ResponseDto> editId(@PathVariable Long id,@Valid @RequestBody EmployeeDto  empDto) {
-        Optional<Model>emp=null;
-         emp = Optional.ofNullable(service.editPayroll(empDto, id));
+    public ResponseEntity<ResponseDto> editId(@Valid @RequestBody EmployeeDto  empDto,@PathVariable Long id) {
+        Optional<Model>emp = Optional.ofNullable(service.editPayroll(empDto, id));
         ResponseDto responseDto = new ResponseDto("  Data edited successfully  ", emp);
         return new ResponseEntity<>(responseDto, HttpStatus.ACCEPTED);
 
@@ -64,6 +63,12 @@ public class Controller {
     public String deletePayroll(@PathVariable Long id) {
         service.deletePayroll(id);
         return "Message Deleted";
+    }
+    @GetMapping("/department/{department}")
+    public ResponseEntity <ResponseDto> getEmployeeDataByDepartment(@PathVariable String department) {
+        List<Model> empDataList = service.getEmployeesByDepartment(department);
+        ResponseDto respDTO = new ResponseDto("Get Data By Department", empDataList);
+        return new ResponseEntity<>(respDTO, HttpStatus.OK);
     }
 
 }

@@ -5,19 +5,21 @@ import com.example.employeepayrollapp.model.Model;
 import com.example.employeepayrollapp.repo.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HelloService {
+public class HelloService implements IService {
     @Autowired
     Repo repository;
+
 
     public String helloMessage() {
         return "Welcome To employeepayroll";
     }
+
 
     public Model saveData(EmployeeDto payroll) {
         Model newuser =new Model (payroll);
@@ -25,10 +27,14 @@ public class HelloService {
 
         return newuser;
     }
+
+
     public Optional<Model> sayHelloById(Long id) {
         return repository.findById(id);
 
     }
+
+
     public List<Model> findByAllPayroll(){
         return repository.findAll();
     }
@@ -46,9 +52,13 @@ public class HelloService {
         } else
             return null;
     }
+
     public void deletePayroll(Long id) {
         repository.deleteById(id);
-    }
 
+    }
+    public List<Model> getEmployeesByDepartment(String department) {
+        return repository.findEmployeesByDepartment(department);
+    }
 
 }
